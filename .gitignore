@@ -1,0 +1,27 @@
+# Ignore compiled binary files
+/bin/
+/obj/
+
+# Ignore build output
+*.exe
+*.out
+*.test
+*.prof
+
+# Ignore IDE/editor config files
+.idea/
+.vscode/
+
+# Ignore Go modules vendoring directory if not needed
+/vendor/
+
+# Ignore Go build cache
+*.a
+*.cache
+
+# Ignore operating system files
+.DS_Store
+Thumbs.db
+
+# Ignore .env
+.env
