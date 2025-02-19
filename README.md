@@ -12,8 +12,8 @@ This Go project decrypts OAuth2 proxy cookies using a shared secret defined in t
 1. **Clone the repository:**
 
    ```bash
-   git clone https://your-repo-url.git
-   cd your-repo-directory
+   git clone https://github.com/sanderkoenders/oauth2-proxy-cookie-decrypter.git
+   cd oauth2-proxy-cookie-decrypter
    ```
 
 2. **Install dependencies:**
@@ -34,8 +34,6 @@ This Go project decrypts OAuth2 proxy cookies using a shared secret defined in t
    COOKIE_SECRET=my-secret-key
    ```
 
-   - **Important**: The `COOKIE_SECRET` must be a valid AES key of 16, 24, or 32 bytes.
-
 4. **Build the project:**
 
    ```bash
@@ -47,29 +45,21 @@ This Go project decrypts OAuth2 proxy cookies using a shared secret defined in t
    The program expects the combined cookie values of `_oauth2_proxy_0` and `_oauth2_proxy_1` as a single argument (enclosed in quotes). For example:
 
    ```bash
-   ./decrypt-cookie "cookie_value_0cookie_value_1"
+   ./decrypt-cookie "<_oauth2_proxy_0><_oauth2_proxy_1>"
    ```
 
-   - Replace `cookie_value_0` and `cookie_value_1` with the actual combined cookie values.
-
-## How It Works
-
-- The program decrypts the combined cookie values using the AES algorithm with the secret key provided in the `.env` file.
-- It expects the **combined values** of the `_oauth2_proxy_0` and `_oauth2_proxy_1` cookies to be passed as a single string (enclosed in quotes).
-- The decrypted data is processed and printed to the terminal.
+   - Replace `_oauth2_proxy_0` and `_oauth2_proxy_1` with the actual combined cookie values.
 
 ## Example
 
-Assuming the values for `_oauth2_proxy_0` and `_oauth2_proxy_1` are `cookie_value_0` and `cookie_value_1`, run the following command:
+Assuming the values for `_oauth2_proxy_0` and `_oauth2_proxy_1` are `_oauth2_proxy_0` and `_oauth2_proxy_1`, run the following command:
 
 ```bash
-./decrypt-cookie "cookie_value_0cookie_value_1"
+./decrypt-cookie "<_oauth2_proxy_0><_oauth2_proxy_1>"
 ```
 
-The program will output the decrypted values and any relevant session data.
+The program will output the decrypted IDToken and AccessToken.
 
 ## Notes
 
 - Ensure the `.env` file is **not committed to version control**. You can add it to `.gitignore` to prevent accidental commits.
-- The secret key (`COOKIE_SECRET`) must be of valid AES length: **16, 24, or 32 bytes**.
-- You can adjust the decryption logic as necessary based on your specific cookie structure and the encryption method used.
