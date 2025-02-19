@@ -40,21 +40,18 @@ func main() {
 	}
 
 	decrypted, err := cipher.Decrypt(encrypted)
-
 	if err != nil {
 		fmt.Printf("error decrypting the session state: %w", err)
 	}
 
-	packed := decrypted
-
-	packed, err = lz4Decompress(decrypted)
+	packed, err := lz4Decompress(decrypted)
 	if err != nil {
 		fmt.Println("Could not decompress")
 	}
 	
 	var ss SessionState
-	err = msgpack.Unmarshal(packed, &ss)
 
+	err = msgpack.Unmarshal(packed, &ss)
 	if err != nil {
 		fmt.Println("error unmarshalling data to session state: %w", err)
 	}
